@@ -3,6 +3,7 @@
 ## 🏗️ Arquitectura del Sistema
 
 ### Estructura de Paquetes
+
 ```
 src/
 ├── LibraryApp.java              # Aplicación principal
@@ -37,12 +38,14 @@ src/
 ## 🔧 Funcionalidades Implementadas
 
 ### CRUD Completo
+
 - **✅ Create**: Crear nuevos libros con validación
 - **✅ Read**: Mostrar libros en tabla formateada
 - **✅ Update**: Actualizar campos específicos
 - **✅ Delete**: Eliminar con confirmación
 
 ### Funcionalidades Avanzadas
+
 - **🔍 Búsqueda**: Por título, autor, ISBN
 - **📊 Estadísticas**: Análisis completo de la biblioteca
 - **📋 Tabla formateada**: Visualización profesional
@@ -51,11 +54,13 @@ src/
 ## 📊 Métricas del Proyecto
 
 ### Líneas de Código
+
 - **Total**: ~400 líneas
 - **Clases**: 2 (LibraryApp, Book)
 - **Métodos**: 15+
 
 ### Complejidad
+
 - **Menús interactivos**: 2 niveles
 - **Algoritmos de búsqueda**: 3 tipos
 - **Cálculos estadísticos**: 7 métricas
@@ -71,11 +76,13 @@ src/
 ## 🚀 Instrucciones de Compilación y Ejecución
 
 ### Compilación
+
 ```bash
 javac -d bin src/LibraryApp.java src/com/sena/app/models/Book.java
 ```
 
 ### Ejecución
+
 ```bash
 java -cp bin LibraryApp
 ```

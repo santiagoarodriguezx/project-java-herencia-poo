@@ -5,8 +5,10 @@ import com.sena.app.models.Book;
 
 public class LibraryApp {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Book> library = new ArrayList<>();    public static void main(String[] args) {
-        System.out.println("🚀 Biblioteca Digital - Versión 1.0");
+    private static List<Book> library = new ArrayList<>();
+
+    public static void main(String[] args) {
+        System.out.println("Biblioteca Digital - Version 1.0");
         
         // Inicializar biblioteca con datos de ejemplo
         initializeLibrary();
@@ -15,7 +17,9 @@ public class LibraryApp {
         do {
             mostrarMenu();
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer            switch (opcion) {
+            scanner.nextLine(); // Limpiar buffer
+
+            switch (opcion) {
                 case 1:
                     crearLibro();
                     break;
@@ -35,35 +39,39 @@ public class LibraryApp {
                     estadisticasBiblioteca();
                     break;
                 case 0:
-                    System.out.println("¡Gracias por usar la biblioteca!");
+                    System.out.println("Gracias por usar la biblioteca!");
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("Opcion no valida.");
+                    break;
             }
         } while (opcion != 0);
 
         scanner.close();
     }
 
-    private static void mostrarMenu() {        System.out.println("\n═══════════════════════════════════════");
+    private static void mostrarMenu() {
+        System.out.println("\n=======================================");
         System.out.println("           BIBLIOTECA DIGITAL");
-        System.out.println("═══════════════════════════════════════");
-        System.out.println("1. ➕ Crear nuevo libro");
-        System.out.println("2. 📚 Mostrar todos los libros");
-        System.out.println("3. ✏️ Actualizar libro");
-        System.out.println("4. ❌ Eliminar libro");
-        System.out.println("5. 🔍 Buscar libro");
-        System.out.println("6. 📊 Estadísticas");
-        System.out.println("0. 🚪 Salir");
-        System.out.println("═══════════════════════════════════════");
-        System.out.print("Seleccione una opción: ");
-    }    private static void crearLibro() {
-        System.out.println("\n--- ➕ CREAR NUEVO LIBRO ---");
+        System.out.println("=======================================");
+        System.out.println("1. + Crear nuevo libro");
+        System.out.println("2. Mostrar todos los libros");
+        System.out.println("3. Actualizar libro");
+        System.out.println("4. X Eliminar libro");
+        System.out.println("5. Buscar libro");
+        System.out.println("6. Estadisticas");
+        System.out.println("0. Salir");
+        System.out.println("=======================================");
+        System.out.print("Seleccione una opcion: ");
+    }
 
-        System.out.print("Título: ");
+    private static void crearLibro() {
+        System.out.println("\n--- + CREAR NUEVO LIBRO ---");
+
+        System.out.print("Titulo: ");
         String title = scanner.nextLine();
 
-        System.out.print("Fecha de edición (YYYY-MM-DD): ");
+        System.out.print("Fecha de edicion (YYYY-MM-DD): ");
         String editionDate = scanner.nextLine();
 
         System.out.print("Editorial: ");
@@ -85,7 +93,7 @@ public class LibraryApp {
         }
 
         // Estado de lectura
-        System.out.print("¿Está leído? (true/false): ");
+        System.out.print("Esta leido? (true/false): ");
         boolean isReaded = scanner.nextBoolean();
         newBook.setReaded(isReaded);
 
@@ -98,13 +106,15 @@ public class LibraryApp {
 
         library.add(newBook);
 
-        System.out.println("✅ Libro agregado exitosamente!");
-        System.out.println("📖 ID asignado: " + newBook.getId());
-    }    private static void leerLibros() {
-        System.out.println("\n--- 📚 BIBLIOTECA COMPLETA ---");
+        System.out.println("Libro agregado exitosamente!");
+        System.out.println("ID asignado: " + newBook.getId());
+    }
+
+    private static void leerLibros() {
+        System.out.println("\n--- BIBLIOTECA COMPLETA ---");
 
         if (library.isEmpty()) {
-            System.out.println("❌ No hay libros en la biblioteca.");
+            System.out.println("No hay libros en la biblioteca.");
             return;
         }
 
@@ -112,9 +122,9 @@ public class LibraryApp {
     }
 
     private static void mostrarTablaLibros(List<Book> libros) {
-        System.out.println("┌────┬─────────────────────────────┬─────────────┬──────────────────┬─────────────────┬──────────────────────────────┬────────┬─────────────┐");
-        System.out.println("│ ID │ Título                      │ Fecha Ed.   │ Editorial        │ ISBN            │ Autores                      │ Leído  │ Hrs. Lectura │");
-        System.out.println("├────┼─────────────────────────────┼─────────────┼──────────────────┼─────────────────┼──────────────────────────────┼────────┼─────────────┤");
+        System.out.println("+----+-----------------------------+-------------+------------------+-----------------+------------------------------+--------+-------------+");
+        System.out.println("| ID | Titulo                      | Fecha Ed.   | Editorial        | ISBN            | Autores                      | Leido  | Hrs. Lectura |");
+        System.out.println("+----+-----------------------------+-------------+------------------+-----------------+------------------------------+--------+-------------+");
 
         for (Book book : libros) {
             String id = String.format("%-3d", book.getId());
@@ -132,15 +142,15 @@ public class LibraryApp {
             }
             String authors = truncateString(authorsStr.toString(), 29);
             
-            String readed = book.isReaded() ? "Sí" : "No";
+            String readed = book.isReaded() ? "Si" : "No";
             String timeReaded = String.format("%-11d", book.getTimeReaded());
 
-            System.out.printf("│ %s │ %-28s │ %-12s │ %-17s │ %-16s │ %-29s │ %-6s │ %s │%n",
+            System.out.printf("| %s | %-28s | %-12s | %-17s | %-16s | %-29s | %-6s | %s |%n",
                     id, title, date, editorial, isbn, authors, readed, timeReaded);
         }
 
-        System.out.println("└────┴─────────────────────────────┴─────────────┴──────────────────┴─────────────────┴──────────────────────────────┴────────┴─────────────┘");
-        System.out.println("📊 Total de libros: " + libros.size());
+        System.out.println("+----+-----------------------------+-------------+------------------+-----------------+------------------------------+--------+-------------+");
+        System.out.println("Total de libros: " + libros.size());
     }
 
     private static String truncateString(String str, int maxLength) {
@@ -152,31 +162,33 @@ public class LibraryApp {
     }
 
     private static void mostrarLibrosConIndices() {
-        System.out.println("📚 Libros disponibles:");
+        System.out.println("Libros disponibles:");
         for (int i = 0; i < library.size(); i++) {
             System.out.println((i + 1) + ". " + library.get(i).getTitle() + " (ID: " + library.get(i).getId() + ")");
         }
-    }    private static void actualizarLibro() {
-        System.out.println("\n--- ✏️ ACTUALIZAR LIBRO ---");
+    }
+
+    private static void actualizarLibro() {
+        System.out.println("\n--- ACTUALIZAR LIBRO ---");
 
         if (library.isEmpty()) {
-            System.out.println("❌ No hay libros para actualizar.");
+            System.out.println("No hay libros para actualizar.");
             return;
         }
 
         mostrarLibrosConIndices();
 
-        System.out.print("Seleccione el número del libro a actualizar: ");
+        System.out.print("Seleccione el numero del libro a actualizar: ");
         int indice = scanner.nextInt();
         scanner.nextLine();
 
         if (indice < 1 || indice > library.size()) {
-            System.out.println("❌ Índice no válido.");
+            System.out.println("Indice no valido.");
             return;
         }
 
         Book libro = library.get(indice - 1);
-        System.out.println("📖 Libro seleccionado: " + libro.getTitle());
+        System.out.println("Libro seleccionado: " + libro.getTitle());
 
         int opcionUpdate;
         do {
@@ -186,19 +198,19 @@ public class LibraryApp {
 
             switch (opcionUpdate) {
                 case 1:
-                    System.out.print("Nuevo título (actual: " + libro.getTitle() + "): ");
+                    System.out.print("Nuevo titulo (actual: " + libro.getTitle() + "): ");
                     String nuevoTitulo = scanner.nextLine();
                     if (!nuevoTitulo.trim().isEmpty()) {
                         libro.setTitle(nuevoTitulo);
-                        System.out.println("✅ Título actualizado.");
+                        System.out.println("Titulo actualizado.");
                     }
                     break;
                 case 2:
-                    System.out.print("Nueva fecha de edición (actual: " + libro.getEdititionDate() + "): ");
+                    System.out.print("Nueva fecha de edicion (actual: " + libro.getEdititionDate() + "): ");
                     String nuevaFecha = scanner.nextLine();
                     if (!nuevaFecha.trim().isEmpty()) {
                         libro.setEdititionDate(nuevaFecha);
-                        System.out.println("✅ Fecha actualizada.");
+                        System.out.println("Fecha actualizada.");
                     }
                     break;
                 case 3:
@@ -206,7 +218,7 @@ public class LibraryApp {
                     String nuevaEditorial = scanner.nextLine();
                     if (!nuevaEditorial.trim().isEmpty()) {
                         libro.setEditorial(nuevaEditorial);
-                        System.out.println("✅ Editorial actualizada.");
+                        System.out.println("Editorial actualizada.");
                     }
                     break;
                 case 4:
@@ -214,7 +226,7 @@ public class LibraryApp {
                     String nuevoIsbn = scanner.nextLine();
                     if (!nuevoIsbn.trim().isEmpty()) {
                         libro.setIsbn(nuevoIsbn);
-                        System.out.println("✅ ISBN actualizado.");
+                        System.out.println("ISBN actualizado.");
                     }
                     break;
                 case 5:
@@ -226,11 +238,11 @@ public class LibraryApp {
                         for (String author : authors) {
                             libro.getAuthors().add(author.trim());
                         }
-                        System.out.println("✅ Autores actualizados.");
+                        System.out.println("Autores actualizados.");
                     }
                     break;
                 case 6:
-                    System.out.print("¿Está leído? (true/false) (actual: " + libro.isReaded() + "): ");
+                    System.out.print("Esta leido? (true/false) (actual: " + libro.isReaded() + "): ");
                     boolean nuevoEstado = scanner.nextBoolean();
                     libro.setReaded(nuevoEstado);
                     if (nuevoEstado) {
@@ -241,80 +253,80 @@ public class LibraryApp {
                         libro.setTimeReaded(0);
                     }
                     scanner.nextLine();
-                    System.out.println("✅ Estado de lectura actualizado.");
+                    System.out.println("Estado de lectura actualizado.");
                     break;
                 case 0:
-                    System.out.println("✅ Actualización completada.");
+                    System.out.println("Actualizacion completada.");
                     break;
                 default:
-                    System.out.println("❌ Opción no válida.");
+                    System.out.println("Opcion no valida.");
             }
         } while (opcionUpdate != 0);
     }
 
     private static void mostrarMenuActualizacion() {
-        System.out.println("\n--- ✏️ CAMPOS A ACTUALIZAR ---");
-        System.out.println("1. Título");
-        System.out.println("2. Fecha de edición");
+        System.out.println("\n--- CAMPOS A ACTUALIZAR ---");
+        System.out.println("1. Titulo");
+        System.out.println("2. Fecha de edicion");
         System.out.println("3. Editorial");
         System.out.println("4. ISBN");
         System.out.println("5. Autores");
         System.out.println("6. Estado de lectura");
-        System.out.println("0. Terminar actualización");
+        System.out.println("0. Terminar actualizacion");
         System.out.print("Seleccione el campo a actualizar: ");
     }
 
     private static void eliminarLibro() {
-        System.out.println("\n--- ❌ ELIMINAR LIBRO ---");
+        System.out.println("\n--- X ELIMINAR LIBRO ---");
 
         if (library.isEmpty()) {
-            System.out.println("❌ No hay libros para eliminar.");
+            System.out.println("No hay libros para eliminar.");
             return;
         }
 
         mostrarLibrosConIndices();
 
-        System.out.print("Seleccione el número del libro a eliminar: ");
+        System.out.print("Seleccione el numero del libro a eliminar: ");
         int indice = scanner.nextInt();
         scanner.nextLine();
 
         if (indice < 1 || indice > library.size()) {
-            System.out.println("❌ Índice no válido.");
+            System.out.println("Indice no valido.");
             return;
         }
 
         Book libro = library.get(indice - 1);
-        System.out.println("📖 Libro seleccionado: " + libro.getTitle());
-        System.out.print("¿Está seguro de eliminar '" + libro.getTitle() + "'? (s/n): ");
+        System.out.println("Libro seleccionado: " + libro.getTitle());
+        System.out.print("Esta seguro de eliminar '" + libro.getTitle() + "'? (s/n): ");
         String confirmacion = scanner.nextLine();
 
         if (confirmacion.equalsIgnoreCase("s") || confirmacion.equalsIgnoreCase("si")) {
             library.remove(indice - 1);
-            System.out.println("✅ Libro eliminado exitosamente!");
-            System.out.println("📊 Libros restantes: " + library.size());
+            System.out.println("Libro eliminado exitosamente!");
+            System.out.println("Libros restantes: " + library.size());
         } else {
-            System.out.println("❌ Eliminación cancelada.");
+            System.out.println("Eliminacion cancelada.");
         }
     }
 
     private static void buscarLibro() {
-        System.out.println("\n--- 🔍 BUSCAR LIBRO ---");
+        System.out.println("\n--- BUSCAR LIBRO ---");
         
         if (library.isEmpty()) {
-            System.out.println("❌ No hay libros en la biblioteca.");
+            System.out.println("No hay libros en la biblioteca.");
             return;
         }
         
         System.out.println("Buscar por:");
-        System.out.println("1. Título");
+        System.out.println("1. Titulo");
         System.out.println("2. Autor");
         System.out.println("3. ISBN");
-        System.out.print("Opción: ");
+        System.out.print("Opcion: ");
 
         int opcion = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Término de búsqueda: ");
+        System.out.print("Termino de busqueda: ");
         String termino = scanner.nextLine().toLowerCase();
 
         List<Book> resultados = new ArrayList<>();
@@ -345,23 +357,23 @@ public class LibraryApp {
                 }
                 break;
             default:
-                System.out.println("❌ Opción no válida.");
+                System.out.println("Opcion no valida.");
                 return;
         }
 
         if (resultados.isEmpty()) {
-            System.out.println("❌ No se encontraron libros que coincidan con la búsqueda.");
+            System.out.println("No se encontraron libros que coincidan con la busqueda.");
         } else {
-            System.out.println("✅ Se encontraron " + resultados.size() + " resultado(s):");
+            System.out.println("Se encontraron " + resultados.size() + " resultado(s):");
             mostrarTablaLibros(resultados);
         }
     }
 
     private static void estadisticasBiblioteca() {
-        System.out.println("\n--- 📊 ESTADÍSTICAS DE LA BIBLIOTECA ---");
+        System.out.println("\n--- ESTADISTICAS DE LA BIBLIOTECA ---");
 
         if (library.isEmpty()) {
-            System.out.println("❌ No hay libros en la biblioteca.");
+            System.out.println("No hay libros en la biblioteca.");
             return;
         }
 
@@ -382,20 +394,20 @@ public class LibraryApp {
         double porcentajeLeidos = totalLibros > 0 ? (double) librosLeidos / totalLibros * 100 : 0;
         double promedioHoras = librosLeidos > 0 ? (double) totalHoras / librosLeidos : 0;
 
-        System.out.println("┌─────────────────────────────────────────┐");
-        System.out.println("│          RESUMEN DE LA BIBLIOTECA       │");
-        System.out.println("├─────────────────────────────────────────┤");
-        System.out.printf("│ 📚 Total de libros:        %12d │%n", totalLibros);
-        System.out.printf("│ ✅ Libros leídos:          %12d │%n", librosLeidos);
-        System.out.printf("│ ❌ Libros no leídos:       %12d │%n", librosNoLeidos);
-        System.out.printf("│ 📈 Porcentaje leído:       %11.1f%% │%n", porcentajeLeidos);
-        System.out.printf("│ 👥 Total de autores:       %12d │%n", totalAutores);
-        System.out.printf("│ ⏱️ Total horas de lectura: %12d │%n", totalHoras);
-        System.out.printf("│ 📊 Promedio horas/libro:   %11.1f │%n", promedioHoras);
-        System.out.println("└─────────────────────────────────────────┘");
+        System.out.println("+----------------------------------------+");
+        System.out.println("|          RESUMEN DE LA BIBLIOTECA      |");
+        System.out.println("+----------------------------------------+");
+        System.out.printf("| Total de libros:        %12d |%n", totalLibros);
+        System.out.printf("| Libros leidos:          %12d |%n", librosLeidos);
+        System.out.printf("| Libros no leidos:       %12d |%n", librosNoLeidos);
+        System.out.printf("| Porcentaje leido:       %11.1f%% |%n", porcentajeLeidos);
+        System.out.printf("| Total de autores:       %12d |%n", totalAutores);
+        System.out.printf("| Total horas de lectura: %12d |%n", totalHoras);
+        System.out.printf("| Promedio horas/libro:   %11.1f |%n", promedioHoras);
+        System.out.println("+----------------------------------------+");
 
         if (librosLeidos > 0) {
-            System.out.println("\n🏆 Libro más largo leído:");
+            System.out.println("\nLibro mas largo leido:");
             Book libroMasLargo = null;
             for (Book libro : library) {
                 if (libro.isReaded() && (libroMasLargo == null || libro.getTimeReaded() > libroMasLargo.getTimeReaded())) {
@@ -403,13 +415,13 @@ public class LibraryApp {
                 }
             }
             if (libroMasLargo != null) {
-                System.out.println("   📖 " + libroMasLargo.getTitle() + " (" + libroMasLargo.getTimeReaded() + " horas)");
+                System.out.println("   " + libroMasLargo.getTitle() + " (" + libroMasLargo.getTimeReaded() + " horas)");
             }
         }
     }
 
     private static void initializeLibrary() {
-        System.out.println("📚 Inicializando biblioteca con datos de ejemplo...");
+        System.out.println("Inicializando biblioteca con datos de ejemplo...");
         
         // Libro 1: Effective Java
         Book book1 = new Book("Effective Java", "2018-01-01", "Addison-Wesley", "978-0134686097");
@@ -422,7 +434,7 @@ public class LibraryApp {
         Book book2 = new Book("Clean Code", "2008-08-01", "Prentice Hall", "978-0132350884");
         book2.getAuthors().add("Robert C. Martin");
         book2.setReaded(true);
-        book2.setTimeReaded(12);
+        book2.setTimeReaded(12); 
         library.add(book2);
 
         // Libro 3: Design Patterns
@@ -449,7 +461,7 @@ public class LibraryApp {
         book5.setTimeReaded(0);
         library.add(book5);
 
-        System.out.println("✅ Se han agregado " + library.size() + " libros de ejemplo a la biblioteca.");
-        System.out.println("🎯 ¡Ahora puedes explorar todas las funcionalidades!");
+        System.out.println("Se han agregado " + library.size() + " libros de ejemplo a la biblioteca.");
+        System.out.println("Ahora puedes explorar todas las funcionalidades!");
     }
 }

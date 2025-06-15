@@ -30,11 +30,13 @@ project-java-herencia-poo/
 ## 🚀 Cómo ejecutar
 
 1. Compilar el proyecto:
+
 ```bash
 javac -d bin src/LibraryApp.java src/com/sena/app/models/Book.java
 ```
 
 2. Ejecutar la aplicación:
+
 ```bash
 java -cp bin LibraryApp
 ```
