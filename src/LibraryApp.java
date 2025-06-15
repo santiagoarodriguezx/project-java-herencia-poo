@@ -8,6 +8,9 @@ public class LibraryApp {
     private static List<Book> library = new ArrayList<>();    public static void main(String[] args) {
         System.out.println("🚀 Biblioteca Digital - Versión 1.0");
         
+        // Inicializar biblioteca con datos de ejemplo
+        initializeLibrary();
+        
         int opcion;
         do {
             mostrarMenu();
@@ -403,5 +406,50 @@ public class LibraryApp {
                 System.out.println("   📖 " + libroMasLargo.getTitle() + " (" + libroMasLargo.getTimeReaded() + " horas)");
             }
         }
+    }
+
+    private static void initializeLibrary() {
+        System.out.println("📚 Inicializando biblioteca con datos de ejemplo...");
+        
+        // Libro 1: Effective Java
+        Book book1 = new Book("Effective Java", "2018-01-01", "Addison-Wesley", "978-0134686097");
+        book1.getAuthors().add("Joshua Bloch");
+        book1.setReaded(true);
+        book1.setTimeReaded(15);
+        library.add(book1);
+
+        // Libro 2: Clean Code
+        Book book2 = new Book("Clean Code", "2008-08-01", "Prentice Hall", "978-0132350884");
+        book2.getAuthors().add("Robert C. Martin");
+        book2.setReaded(true);
+        book2.setTimeReaded(12);
+        library.add(book2);
+
+        // Libro 3: Design Patterns
+        Book book3 = new Book("Design Patterns: Elements of Reusable Object-Oriented Software", "1994-10-31", "Addison-Wesley", "978-0201633610");
+        book3.getAuthors().add("Erich Gamma");
+        book3.getAuthors().add("Richard Helm");
+        book3.getAuthors().add("Ralph Johnson");
+        book3.getAuthors().add("John Vlissides");
+        book3.setReaded(false);
+        book3.setTimeReaded(0);
+        library.add(book3);
+
+        // Libro 4: Spring in Action
+        Book book4 = new Book("Spring in Action", "2020-11-01", "Manning Publications", "978-1617297571");
+        book4.getAuthors().add("Craig Walls");
+        book4.setReaded(true);
+        book4.setTimeReaded(8);
+        library.add(book4);
+
+        // Libro 5: Java: The Complete Reference
+        Book book5 = new Book("Java: The Complete Reference", "2021-03-26", "McGraw-Hill Education", "978-1260463419");
+        book5.getAuthors().add("Herbert Schildt");
+        book5.setReaded(false);
+        book5.setTimeReaded(0);
+        library.add(book5);
+
+        System.out.println("✅ Se han agregado " + library.size() + " libros de ejemplo a la biblioteca.");
+        System.out.println("🎯 ¡Ahora puedes explorar todas las funcionalidades!");
     }
 }
