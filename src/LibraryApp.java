@@ -81,9 +81,7 @@ public class LibraryApp {
 
         System.out.println("✅ Libro agregado exitosamente!");
         System.out.println("📖 ID asignado: " + newBook.getId());
-    }
-
-    private static void leerLibros() {
+    }    private static void leerLibros() {
         System.out.println("\n--- 📚 BIBLIOTECA COMPLETA ---");
 
         if (library.isEmpty()) {
@@ -91,8 +89,46 @@ public class LibraryApp {
             return;
         }
 
-        for (Book book : library) {
-            System.out.println(book.toString());
+        mostrarTablaLibros(library);
+    }
+
+    private static void mostrarTablaLibros(List<Book> libros) {
+        System.out.println("┌────┬─────────────────────────────┬─────────────┬──────────────────┬─────────────────┬──────────────────────────────┬────────┬─────────────┐");
+        System.out.println("│ ID │ Título                      │ Fecha Ed.   │ Editorial        │ ISBN            │ Autores                      │ Leído  │ Hrs. Lectura │");
+        System.out.println("├────┼─────────────────────────────┼─────────────┼──────────────────┼─────────────────┼──────────────────────────────┼────────┼─────────────┤");
+
+        for (Book book : libros) {
+            String id = String.format("%-3d", book.getId());
+            String title = truncateString(book.getTitle(), 28);
+            String date = truncateString(book.getEdititionDate(), 12);
+            String editorial = truncateString(book.getEditorial(), 17);
+            String isbn = truncateString(book.getIsbn(), 16);
+            
+            StringBuilder authorsStr = new StringBuilder();
+            for (int i = 0; i < book.getAuthors().size(); i++) {
+                authorsStr.append(book.getAuthors().get(i));
+                if (i < book.getAuthors().size() - 1) {
+                    authorsStr.append(", ");
+                }
+            }
+            String authors = truncateString(authorsStr.toString(), 29);
+            
+            String readed = book.isReaded() ? "Sí" : "No";
+            String timeReaded = String.format("%-11d", book.getTimeReaded());
+
+            System.out.printf("│ %s │ %-28s │ %-12s │ %-17s │ %-16s │ %-29s │ %-6s │ %s │%n",
+                    id, title, date, editorial, isbn, authors, readed, timeReaded);
+        }
+
+        System.out.println("└────┴─────────────────────────────┴─────────────┴──────────────────┴─────────────────┴──────────────────────────────┴────────┴─────────────┘");
+        System.out.println("📊 Total de libros: " + libros.size());
+    }
+
+    private static String truncateString(String str, int maxLength) {
+        if (str.length() <= maxLength) {
+            return str;
+        } else {
+            return str.substring(0, maxLength - 3) + "...";
         }
     }
 }
