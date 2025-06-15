@@ -37,9 +37,7 @@ public class LibraryApp {
         System.out.println("0. 🚪 Salir");
         System.out.println("═══════════════════════════════════════");
         System.out.print("Seleccione una opción: ");
-    }
-
-    private static void crearLibro() {
+    }    private static void crearLibro() {
         System.out.println("\n--- ➕ CREAR NUEVO LIBRO ---");
 
         System.out.print("Título: ");
@@ -55,8 +53,32 @@ public class LibraryApp {
         String isbn = scanner.nextLine();
 
         Book newBook = new Book(title, editionDate, editorial, isbn);
+
+        // Agregar autores
+        System.out.print("Autores (separados por comas): ");
+        String authorsInput = scanner.nextLine();
+        if (!authorsInput.trim().isEmpty()) {
+            String[] authors = authorsInput.split(",");
+            for (String author : authors) {
+                newBook.getAuthors().add(author.trim());
+            }
+        }
+
+        // Estado de lectura
+        System.out.print("¿Está leído? (true/false): ");
+        boolean isReaded = scanner.nextBoolean();
+        newBook.setReaded(isReaded);
+
+        if (isReaded) {
+            System.out.print("Horas de lectura: ");
+            int timeReaded = scanner.nextInt();
+            newBook.setTimeReaded(timeReaded);
+        }
+        scanner.nextLine(); // Limpiar buffer
+
         library.add(newBook);
 
         System.out.println("✅ Libro agregado exitosamente!");
+        System.out.println("📖 ID asignado: " + newBook.getId());
     }
 }
