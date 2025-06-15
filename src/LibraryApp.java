@@ -19,6 +19,9 @@ public class LibraryApp {
                 case 2:
                     leerLibros();
                     break;
+                case 3:
+                    actualizarLibro();
+                    break;
                 case 0:
                     System.out.println("¡Gracias por usar la biblioteca!");
                     break;
@@ -35,6 +38,7 @@ public class LibraryApp {
         System.out.println("═══════════════════════════════════════");
         System.out.println("1. ➕ Crear nuevo libro");
         System.out.println("2. 📚 Mostrar todos los libros");
+        System.out.println("3. ✏️ Actualizar libro");
         System.out.println("0. 🚪 Salir");
         System.out.println("═══════════════════════════════════════");
         System.out.print("Seleccione una opción: ");
@@ -130,5 +134,38 @@ public class LibraryApp {
         } else {
             return str.substring(0, maxLength - 3) + "...";
         }
+    }
+
+    private static void mostrarLibrosConIndices() {
+        System.out.println("📚 Libros disponibles:");
+        for (int i = 0; i < library.size(); i++) {
+            System.out.println((i + 1) + ". " + library.get(i).getTitle() + " (ID: " + library.get(i).getId() + ")");
+        }
+    }
+
+    private static void actualizarLibro() {
+        System.out.println("\n--- ✏️ ACTUALIZAR LIBRO ---");
+
+        if (library.isEmpty()) {
+            System.out.println("❌ No hay libros para actualizar.");
+            return;
+        }
+
+        mostrarLibrosConIndices();
+
+        System.out.print("Seleccione el número del libro a actualizar: ");
+        int indice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (indice < 1 || indice > library.size()) {
+            System.out.println("❌ Índice no válido.");
+            return;
+        }
+
+        Book libro = library.get(indice - 1);
+        System.out.println("📖 Libro seleccionado: " + libro.getTitle());
+
+        // TODO: Implementar menú de campos a actualizar
+        System.out.println("🚧 Funcionalidad de actualización en desarrollo...");
     }
 }
