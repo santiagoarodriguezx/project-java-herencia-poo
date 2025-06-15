@@ -12,11 +12,12 @@ public class LibraryApp {
         do {
             mostrarMenu();
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
-
-            switch (opcion) {
+            scanner.nextLine(); // Limpiar buffer            switch (opcion) {
                 case 1:
                     crearLibro();
+                    break;
+                case 2:
+                    leerLibros();
                     break;
                 case 0:
                     System.out.println("¡Gracias por usar la biblioteca!");
@@ -29,11 +30,11 @@ public class LibraryApp {
         scanner.close();
     }
 
-    private static void mostrarMenu() {
-        System.out.println("\n═══════════════════════════════════════");
+    private static void mostrarMenu() {        System.out.println("\n═══════════════════════════════════════");
         System.out.println("           BIBLIOTECA DIGITAL");
         System.out.println("═══════════════════════════════════════");
         System.out.println("1. ➕ Crear nuevo libro");
+        System.out.println("2. 📚 Mostrar todos los libros");
         System.out.println("0. 🚪 Salir");
         System.out.println("═══════════════════════════════════════");
         System.out.print("Seleccione una opción: ");
@@ -80,5 +81,18 @@ public class LibraryApp {
 
         System.out.println("✅ Libro agregado exitosamente!");
         System.out.println("📖 ID asignado: " + newBook.getId());
+    }
+
+    private static void leerLibros() {
+        System.out.println("\n--- 📚 BIBLIOTECA COMPLETA ---");
+
+        if (library.isEmpty()) {
+            System.out.println("❌ No hay libros en la biblioteca.");
+            return;
+        }
+
+        for (Book book : library) {
+            System.out.println(book.toString());
+        }
     }
 }
