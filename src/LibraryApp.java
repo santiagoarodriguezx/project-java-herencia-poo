@@ -22,6 +22,9 @@ public class LibraryApp {
                 case 3:
                     actualizarLibro();
                     break;
+                case 4:
+                    eliminarLibro();
+                    break;
                 case 0:
                     System.out.println("¡Gracias por usar la biblioteca!");
                     break;
@@ -39,6 +42,7 @@ public class LibraryApp {
         System.out.println("1. ➕ Crear nuevo libro");
         System.out.println("2. 📚 Mostrar todos los libros");
         System.out.println("3. ✏️ Actualizar libro");
+        System.out.println("4. ❌ Eliminar libro");
         System.out.println("0. 🚪 Salir");
         System.out.println("═══════════════════════════════════════");
         System.out.print("Seleccione una opción: ");
@@ -247,5 +251,38 @@ public class LibraryApp {
         System.out.println("6. Estado de lectura");
         System.out.println("0. Terminar actualización");
         System.out.print("Seleccione el campo a actualizar: ");
+    }
+
+    private static void eliminarLibro() {
+        System.out.println("\n--- ❌ ELIMINAR LIBRO ---");
+
+        if (library.isEmpty()) {
+            System.out.println("❌ No hay libros para eliminar.");
+            return;
+        }
+
+        mostrarLibrosConIndices();
+
+        System.out.print("Seleccione el número del libro a eliminar: ");
+        int indice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (indice < 1 || indice > library.size()) {
+            System.out.println("❌ Índice no válido.");
+            return;
+        }
+
+        Book libro = library.get(indice - 1);
+        System.out.println("📖 Libro seleccionado: " + libro.getTitle());
+        System.out.print("¿Está seguro de eliminar '" + libro.getTitle() + "'? (s/n): ");
+        String confirmacion = scanner.nextLine();
+
+        if (confirmacion.equalsIgnoreCase("s") || confirmacion.equalsIgnoreCase("si")) {
+            library.remove(indice - 1);
+            System.out.println("✅ Libro eliminado exitosamente!");
+            System.out.println("📊 Libros restantes: " + library.size());
+        } else {
+            System.out.println("❌ Eliminación cancelada.");
+        }
     }
 }
