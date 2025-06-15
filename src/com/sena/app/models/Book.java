@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
-    // Atributos básicos
     private static int nextId = 1;
     private int id;
     private String title;
@@ -15,7 +14,7 @@ public class Book {
     private boolean readed;
     private int timeReaded;
 
-    // Constructor básico
+    // Constructor
     public Book(String title, String edititionDate, String editorial, String isbn) {
         this.id = nextId++;
         this.title = title;
@@ -27,7 +26,7 @@ public class Book {
         this.timeReaded = 0;
     }
 
-    // Getters y Setters
+    // Getters
     public int getId() {
         return id;
     }
@@ -36,58 +35,56 @@ public class Book {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getEdititionDate() {
         return edititionDate;
-    }
-
-    public void setEdititionDate(String edititionDate) {
-        this.edititionDate = edititionDate;
     }
 
     public String getEditorial() {
         return editorial;
     }
 
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
-
     public String getIsbn() {
         return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public List<String> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<String> authors) {
-        this.authors = authors;
-    }
-
     public boolean isReaded() {
         return readed;
-    }
-
-    public void setReaded(boolean readed) {
-        this.readed = readed;
     }
 
     public int getTimeReaded() {
         return timeReaded;
     }
 
+    // Setters
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setEdititionDate(String edititionDate) {
+        this.edititionDate = edititionDate;
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setReaded(boolean readed) {
+        this.readed = readed;
+    }
+
     public void setTimeReaded(int timeReaded) {
         this.timeReaded = timeReaded;
     }
 
+    // toString method
     @Override
     public String toString() {
         StringBuilder authorsStr = new StringBuilder();
@@ -98,14 +95,14 @@ public class Book {
             }
         }
 
-        return "📖 Libro ID: " + id + "\n" +
-               "   Título: " + title + "\n" +
-               "   Fecha de Edición: " + edititionDate + "\n" +
+        return "Libro ID: " + id + "\n" +
+               "   Titulo: " + title + "\n" +
+               "   Fecha de Edicion: " + edititionDate + "\n" +
                "   Editorial: " + editorial + "\n" +
                "   ISBN: " + isbn + "\n" +
                "   Autores: " + authorsStr.toString() + "\n" +
-               "   Leído: " + (readed ? "Sí" : "No") + "\n" +
+               "   Leido: " + (readed ? "Si" : "No") + "\n" +
                "   Tiempo de Lectura: " + timeReaded + " horas\n" +
-               "═══════════════════════════════════════";
+               "=======================================";
     }
 }
