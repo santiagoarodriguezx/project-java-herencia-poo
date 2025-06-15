@@ -16,7 +16,7 @@ public class LibraryApp {
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Crear libro - En desarrollo");
+                    crearLibro();
                     break;
                 case 0:
                     System.out.println("¡Gracias por usar la biblioteca!");
@@ -37,5 +37,26 @@ public class LibraryApp {
         System.out.println("0. 🚪 Salir");
         System.out.println("═══════════════════════════════════════");
         System.out.print("Seleccione una opción: ");
+    }
+
+    private static void crearLibro() {
+        System.out.println("\n--- ➕ CREAR NUEVO LIBRO ---");
+
+        System.out.print("Título: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Fecha de edición (YYYY-MM-DD): ");
+        String editionDate = scanner.nextLine();
+
+        System.out.print("Editorial: ");
+        String editorial = scanner.nextLine();
+
+        System.out.print("ISBN: ");
+        String isbn = scanner.nextLine();
+
+        Book newBook = new Book(title, editionDate, editorial, isbn);
+        library.add(newBook);
+
+        System.out.println("✅ Libro agregado exitosamente!");
     }
 }
